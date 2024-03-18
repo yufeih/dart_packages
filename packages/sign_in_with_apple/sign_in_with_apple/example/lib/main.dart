@@ -57,10 +57,8 @@ class _MyAppState extends State<MyApp> {
                         // NOTE(tp): For package local development use (as described in `Development.md`)
                         // Uri.parse('https://siwa-flutter-plugin.dev/')
                         kIsWeb
-                            ? Uri.parse('https://${window.location.host}/')
-                            : Uri.parse(
-                                'https://flutter-sign-in-with-apple-example.glitch.me/callbacks/sign_in_with_apple',
-                              ),
+                            ? 'https://${window.location.host}/'
+                            : 'https://flutter-sign-in-with-apple-example.glitch.me/callbacks/sign_in_with_apple',                              
                   ),
                   // TODO: Remove these if you have no need for them
                   nonce: 'example-nonce',

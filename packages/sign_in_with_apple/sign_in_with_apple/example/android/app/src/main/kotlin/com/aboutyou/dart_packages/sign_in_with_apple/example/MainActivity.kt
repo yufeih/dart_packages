@@ -1,6 +1,6 @@
 package com.aboutyou.dart_packages.sign_in_with_apple.example
 
-import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.android.FlutterFragmentActivity
 
-class MainActivity: FlutterActivity() {
+class MainActivity: FlutterFragmentActivity() {
 }

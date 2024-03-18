@@ -154,7 +154,7 @@ class MethodChannelSignInWithApple extends SignInWithApplePlatform {
       path: '/auth/authorize',
       queryParameters: <String, String>{
         'client_id': webAuthenticationOptions.clientId,
-        'redirect_uri': webAuthenticationOptions.redirectUri.toString(),
+        'redirect_uri': webAuthenticationOptions.redirectUri,
         'scope': scopes.map((scope) {
           switch (scope) {
             case AppleIDAuthorizationScopes.email:
@@ -175,21 +175,31 @@ class MethodChannelSignInWithApple extends SignInWithApplePlatform {
     ).toString();
 
     try {
-      final result = await _channel.invokeMethod<String>(
+      final result = await _channel.invokeMethod<Map<dynamic, dynamic>?>(
         'performAuthorizationRequest',
         <String, String>{
           'url': uri,
+          'redirectUrl': webAuthenticationOptions.redirectUri,
+          "state": state ?? '',
         },
       );
 
       if (result == null) {
         throw const SignInWithAppleAuthorizationException(
-          code: AuthorizationErrorCode.invalidResponse,
-          message: 'Did receive `null` URL from performAuthorizationRequest',
+          code: AuthorizationErrorCode.canceled,
+          message: '',
         );
       }
 
-      return parseAuthorizationCredentialAppleIDFromDeeplink(Uri.parse(result));
+      return AuthorizationCredentialAppleID(
+        authorizationCode: result['authorizationCode'] ?? "",
+        userIdentifier: result['userIdentifier'],
+        identityToken: result['identityToken'],
+        givenName: null,
+        familyName: null,
+        email: null,
+        state: null,
+      );
     } on PlatformException catch (exception) {
       throw SignInWithAppleException.fromPlatformException(exception);
     }

@@ -16,5 +16,5 @@ class WebAuthenticationOptions {
   /// The URI to which the authorization redirects. It must include a domain name, and can’t be an IP address or localhost.
   ///
   /// Must be configured at https://developer.apple.com/account/resources/identifiers/list/serviceId
-  final Uri redirectUri;
+  final String redirectUri;
 }

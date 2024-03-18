@@ -145,6 +145,10 @@ To ensure that deep links from the login web page (shown in a Chrome Custom Tab)
   - With launch mode `singleTop` the Chrome Custom Tab stays present both after using the app switcher or launching the app anew via its icon
   - If you change your app's `launchMode` be sure to test any other third-party integrations that might be affected by this (e.g. deep links)
 
+## FragmentActivity
+
+Change `MainActivity : FlutterActivity` to `MainActivity : FlutterFragmentActivity`.
+
 ### Web
 
 For web support you need to add the follow script import to your `index.html`'s `<head>` tag:
